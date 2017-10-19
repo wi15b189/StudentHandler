@@ -1,12 +1,74 @@
-﻿<Window x:Class="StudentHandler.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentHandler"
+        xmlns:ViewModels="clr-namespace:StudentHandler.ViewModels" x:Class="StudentHandler.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <ViewModels:MainViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <TabControl Grid.ColumnSpan="3" Margin="10,0">
+            <TabItem Header="Studierende">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Content="Vorname" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,8,0,8.8" FontSize="10" Height="24" Width="50" />
+                        <Label Grid.Row="1" Content="Nachname" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,8.2,0,8.6" FontSize="10" Height="24" Width="58"/>
+                        <Label Grid.Row="2" Content="Alter" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,8.4,0,8.4" FontSize="10" Height="24" Width="30"/>
+                        <Label Grid.Row="3" Content="Studiengang" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,8.6,0,8.2" FontSize="10" Height="24" Width="66"/>
+                        <Label Grid.Row="4" Content="SB bezahlt" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,8.8,0,8" FontSize="10" Height="24" Width="69"/>
+
+
+                        <TextBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10" Text="{Binding Student.Firstname}"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10" Text="{Binding Student.Lastname}"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10" Text="{Binding Student.Age}"/>
+                        <ComboBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10" SelectedItem="{Binding Student.Program}" ItemsSource="{Binding ProgramSelection}"/>
+                        <CheckBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" IsChecked="{Binding Student.Paid}" />
+                        <Button Grid.ColumnSpan="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Content="Speichern"/>
+                    </Grid>
+                    <DataGrid Grid.Column="1" Margin="10"/>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <Button Content="Editieren" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+                        <Button Content="Löschen" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Stammdaten">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBox Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80"/>
+                        <Button Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Speichern"/>
+                    </StackPanel>
+                    <ListBox Grid.Column="1" Margin="10"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
